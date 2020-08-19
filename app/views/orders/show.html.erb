@@ -6,42 +6,44 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
-    <h3>We've sent you the details about you order to: <%=@order.email%> </h3> 
+    <h3>We've sent the details about you order to: <%=@order.email%> </h3> 
  </div>
 </section>
 
 <section class="cart-show">
-
   <header class="page-header">
-    <h1>My Orders</h1>
+    <h1>Your order summary: </h1>
   </header>
-  <div class="panel panel-default items">
-    <table class="table table-bordered">
+    <table class="table table-bordered orders-summary">
       <thead>
-        <tr>
-          <th colspan="2">Product</th>
+      <%@order.line_items.each do |item| %>
+       <tr>
+          <th>Product name</th>
+          <th>Description</th>
           <th>Unit Price</th>
-            <th>Quantity</th>
+          <th>Quantity</th>
           <th>Price</th>
         </tr>
       </thead>
       <tbody>
-        <% enhanced_cart.each do |item| %>
-          <%= render 'item', product: item[:product], quantity: item[:quantity].to_i %>
+          <th><%= item.product.name %><img src="<%= item.product.image %>"</th>
+          <th><%= item.product.description %></th>
+          <th>$<%= item.total_price_cents.to_f / 100 %></th>
+          <th><%= item.quantity %></th>
+          <th>$<%= (item.total_price_cents.to_f)/100*item.quantity %></th>
         <% end %>
       </tbody>
-      <tfoot>
+       <tfoot>
         <tr>
           <th colspan="4">
             TOTAL:
           </th>
           <th>
-            $<%= cart_subtotal_cents / 100.0 %>
+            $<%= @order.total_cents / 100.0 %>
           </th>
         </tr>
       </tfoot>
     </table>
-  </div>
 </section>
 
 
