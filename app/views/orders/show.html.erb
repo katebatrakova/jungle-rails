@@ -6,7 +6,74 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <h3>We've sent you the details about you order to: <%=@order.email%> </h3> 
+ </div>
+</section>
+
+<section class="cart-show">
+
+  <header class="page-header">
+    <h1>My Orders</h1>
+  </header>
+  <div class="panel panel-default items">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+            <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% enhanced_cart.each do |item| %>
+          <%= render 'item', product: item[:product], quantity: item[:quantity].to_i %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            $<%= cart_subtotal_cents / 100.0 %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
+</section>
+
+
+
+ <%# create_table "orders", force: :cascade do |t|
+    t.integer  "total_cents"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "stripe_charge_id"
+    t.string   "email"
+  end %>
+
+  <%# create_table "line_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.integer  "item_price_cents"
+    t.integer  "total_price_cents"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end %>
+
+  <%# create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
+    t.integer  "price_cents"
+    t.integer  "quantity"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+  end %>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
