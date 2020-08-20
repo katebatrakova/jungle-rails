@@ -30,4 +30,17 @@ class ApplicationController < ActionController::Base
     cookies[:cart]
   end
 
+  #method to look up the user is logged in
+  #save user object to a variable @current_user
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  #helper_method allows to use @current_user in our view files
+  helper_method :current_user
+
+  # Authorize is for sending someone not logged to the login page
+  # def authorize
+  #   redirect_to '/login' unless current_user
+  # end
+
 end

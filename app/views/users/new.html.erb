@@ -1,0 +1,50 @@
+<%# view files should be inside a folder with the same name as the controller and are named for the action they render %> 
+<h1>Signup!</h1>
+
+<form>
+<%= form_for :user, url: '/users' do |form| %>
+<div class="signup-form">
+
+      <div class="form-group">
+			   <div class="input-group">
+			     <span class="input-group-text">
+			       <span class="fa fa-user"></span>
+			     </span>                    
+             Name: <%= form.text_field :name %>
+		     </div>
+		  </div>
+
+
+      <div class="form-group">
+			   <div class="input-group">
+			     <span class="input-group-text">
+						<i class="fa fa-paper-plane"></i>
+			     </span>                    
+             Email: <%= form.text_field :email %>
+		     </div>
+     </div>
+
+
+      <div class="form-group">
+			   <div class="input-group">
+			     <span class="input-group-text">
+						<i class="fa fa-lock"></i>
+			     </span>                    
+             Password: <%= form.password_field :password %>
+		     </div>
+     </div>
+
+     <div class="form-group">
+			<div class="input-group">
+					<span class="input-group-text">
+						<i class="fa fa-lock"></i>
+						<i class="fa fa-check"></i>
+					</span>                    
+            Password Confirmation: <%= form.password_field :password_confirmation %>
+			</div>
+        </div>
+  <%= form.submit "Submit" %>
+  </div>
+</form>
+
+<% end %>
