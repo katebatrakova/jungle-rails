@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     cookies[:cart]
   end
 
-  #method to look up the user is logged in
+   #method to look up the user is logged in
   #save user object to a variable @current_user
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
