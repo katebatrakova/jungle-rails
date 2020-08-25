@@ -46,11 +46,12 @@ RSpec.describe User, type: :model do
   end
 
   it "user's email must be unique" do
-    @user = User.new(name:'Kate', email:'kate@MAIL.com', password:'12345678', password_confirmation:'12345678')
-    @user1 = User.new(name:'Mike', email:'kate@MAIL.com', password:'12345678', password_confirmation:'12345678')
-    # expect(@another_user).to_not be_valid
-    # expect(@user.errors.messages[:email]).to include("Email has already been taken")
-   puts @user1.errors.messages
+    @user = User.new(name:'Kate', email:'kiki@mail.com', password:'12345678', password_confirmation:'12345678')
+    @user.save!
+    @user1 = User.new(name:'Mike', email:'kiki@mail.com', password:'12345678', password_confirmation:'12345678')
+    expect(@user1).to_not be_valid
+    puts @user1.errors.messages
+    expect(@user1.errors.messages[:email]).to include("has already been taken")
   end
 
  end
