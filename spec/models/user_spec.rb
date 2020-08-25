@@ -50,7 +50,6 @@ RSpec.describe User, type: :model do
     @user.save!
     @user1 = User.new(name:'Mike', email:'kiki@mail.com', password:'12345678', password_confirmation:'12345678')
     expect(@user1).to_not be_valid
-    puts @user1.errors.messages
     expect(@user1.errors.messages[:email]).to include("has already been taken")
   end
 
@@ -61,7 +60,6 @@ RSpec.describe User, type: :model do
   @user = User.new(name:'Kate', email:'kate@mail.com', password:'12345678', password_confirmation:'12345678')
   @user.save
   user_authenticated = User.authenticate_with_credentials('kate@mail.com', '12345678')
-  puts user_authenticated
   expect(user_authenticated).to eq(@user)
   
 end
@@ -72,10 +70,9 @@ describe '.authenticate_with_credentials' do
   @user = User.new(name:'Kate', email:'kate@mail.com', password:'12345678', password_confirmation:'12345678')
   @user.save
   user_authenticated = User.authenticate_with_credentials('kate@mail.com', '1234567')
-  puts user_authenticated
-  expect(user_authenticated).to eq(nil)
-  
+  expect(user_authenticated).to eq(nil) 
 end
 end
+
 
 end
